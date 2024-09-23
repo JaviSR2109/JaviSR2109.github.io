@@ -4,6 +4,9 @@ body{
 h1{
     color: rgb(251, 255, 0)
     margin-left: 20px ;  
+  p{
+    color:rgb(251, 255, 0)
+  }
 }
 ul {
   list-style-type: none;
