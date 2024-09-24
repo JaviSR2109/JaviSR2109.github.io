@@ -1,11 +1,11 @@
 body{
-    background-color: #000000 ; 
+    background-color: white ; 
 }
 h1{
-    color: rgb(251, 255, 0)
+    color: rgb(0, 255, 4)
     margin-left: 20px ;  
   p{
-    color:rgb(251, 255, 0)
+    color:rgb(0, 255, 4)
   }
 }
 ul {
@@ -22,7 +22,7 @@ li {
 
 li a {
   display: block;
-  color: rgb(251, 255, 0);
+  color: rgb(0, 255, 4);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
