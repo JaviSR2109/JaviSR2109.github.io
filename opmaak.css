@@ -1,11 +1,12 @@
 body{
     background-color: blue ;
-    color:yellow; 
+    color:white
 }
 h1{
-    color: yellow
+    color: white
   p{
-    color: yellow
+    color: white
+    
       }
 }
 ul {
@@ -22,7 +23,7 @@ li {
 
 li a {
   display: block;
-  color: yellow;
+  color: white
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
