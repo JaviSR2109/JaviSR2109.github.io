@@ -1,5 +1,167 @@
 <!DOCTYPE html>
 <html>
+    <!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleurmodel Oefenspel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #color-box {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 2px solid #000;
+        }
+        input {
+            width: 50px;
+            margin: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Kleurmodel Oefenspel</h1>
+
+    <p id="instruction">Klik op 'Nieuwe kleur' om te beginnen</p>
+
+    <div id="color-box"></div>
+
+    <div id="rgb-input">
+        <label for="red">R:</label>
+        <input type="number" id="red" min="0" max="255">
+        <label for="green">G:</label>
+        <input type="number" id="green" min="0" max="255">
+        <label for="blue">B:</label>
+        <input type="number" id="blue" min="0" max="255">
+    </div>
+
+    <div id="cmyk-input" class="hidden">
+        <label for="cyan">C:</label>
+        <input type="number" id="cyan" min="0" max="100">
+        <label for="magenta">M:</label>
+        <input type="number" id="magenta" min="0" max="100">
+        <label for="yellow">Y:</label>
+        <input type="number" id="yellow" min="0" max="100">
+        <label for="black">K:</label>
+        <input type="number" id="black" min="0" max="100">
+    </div>
+
+    <div class="buttons">
+        <button onclick="newColor()">Nieuwe kleur</button>
+        <button onclick="checkAnswer()">Controleer</button>
+    </div>
+
+    <div>
+        <label><input type="radio" name="mode" value="RGB" checked onchange="toggleMode()"> RGB</label>
+        <label><input type="radio" name="mode" value="CMYK" onchange="toggleMode()"> CMYK</label>
+    </div>
+
+    <script>
+        let currentColor = null;
+        let mode = 'RGB';
+
+        function rgbToCmyk(r, g, b) {
+            let c = 1 - r / 255;
+            let m = 1 - g / 255;
+            let y = 1 - b / 255;
+            let k = Math.min(c, m, y);
+            if (k < 1) {
+                c = (c - k) / (1 - k);
+                m = (m - k) / (1 - k);
+                y = (y - k) / (1 - k);
+            } else {
+                c = 0;
+                m = 0;
+                y = 0;
+            }
+            return [Math.round(c * 100), Math.round(m * 100), Math.round(y * 100), Math.round(k * 100)];
+        }
+
+        function cmykToRgb(c, m, y, k) {
+            let r = 255 * (1 - c / 100) * (1 - k / 100);
+            let g = 255 * (1 - m / 100) * (1 - k / 100);
+            let b = 255 * (1 - y / 100) * (1 - k / 100);
+            return [Math.round(r), Math.round(g), Math.round(b)];
+        }
+
+        function generateRgbColor() {
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            return [r, g, b];
+        }
+
+        function setColorBox(rgb) {
+            const colorBox = document.getElementById('color-box');
+            colorBox.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+        }
+
+        function newColor() {
+            currentColor = generateRgbColor();
+            setColorBox(currentColor);
+            let [r, g, b] = currentColor;
+            let [c, m, y, k] = rgbToCmyk(r, g, b);
+            if (mode === 'RGB') {
+                document.getElementById('instruction').textContent = `Raad de RGB-kleur: (R: ${r}, G: ${g}, B: ${b})`;
+            } else {
+                document.getElementById('instruction').textContent = `Raad de CMYK-kleur: (C: ${c}, M: ${m}, Y: ${y}, K: ${k})`;
+            }
+        }
+
+        function checkAnswer() {
+            if (mode === 'RGB') {
+                let r = parseInt(document.getElementById('red').value);
+                let g = parseInt(document.getElementById('green').value);
+                let b = parseInt(document.getElementById('blue').value);
+                if (r === currentColor[0] && g === currentColor[1] && b === currentColor[2]) {
+                    alert('Correct! Je hebt de juiste kleur geraden.');
+                } else {
+                    alert('Fout! Dat is niet de juiste kleur.');
+                }
+            } else {
+                let c = parseInt(document.getElementById('cyan').value);
+                let m = parseInt(document.getElementById('magenta').value);
+                let y = parseInt(document.getElementById('yellow').value);
+                let k = parseInt(document.getElementById('black').value);
+                let [r, g, b] = cmykToRgb(c, m, y, k);
+                if (r === currentColor[0] && g === currentColor[1] && b === currentColor[2]) {
+                    alert('Correct! Je hebt de juiste kleur geraden.');
+                } else {
+                    alert('Fout! Dat is niet de juiste kleur.');
+                }
+            }
+        }
+
+        function toggleMode() {
+            mode = document.querySelector('input[name="mode"]:checked').value;
+            if (mode === 'RGB') {
+                document.getElementById('rgb-input').classList.remove('hidden');
+                document.getElementById('cmyk-input').classList.add('hidden');
+            } else {
+                document.getElementById('rgb-input').classList.add('hidden');
+                document.getElementById('cmyk-input').classList.remove('hidden');
+            }
+        }
+
+        // Start het spel met een nieuwe kleur
+        newColor();
+    </script>
+
+</body>
+</html>
+
     <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="binairstelsel.html">Binairstelsel</a></li>
