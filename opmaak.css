@@ -1,14 +1,14 @@
-body{
+body{ /* Deze regel zorgt ervoor dat de achtergrond van de pagina’s blauw is*/
     background-color: blue ;
     color:white
-}
+} /* Deze regel zorgt ervoor dat de koppen wit zijn en dat de tekst ook wit is*/
 h1{
     color: white
   p{
     color: white
     
       }
-}
+} /* Deze regel zorgt ervoor dat er geen bullet-points of randjes om mijn menu heen zijn. Ook zorgt het ervoor dat de achtergrond zwart is*/
 ul {
   list-style-type: none;
   margin: 0;
@@ -18,17 +18,17 @@ ul {
   color: white
 }
 
-li {
+li { /* Deze regel zorgt ervoor dat mijn menu bovenaan aan de linker kant is.*/
   float: left;
 }
 
-li a {
+li a { /* Deze regel zorgt ervoor dat de verschillende kopjes op mijn menu worden weergegeven als blok. Ook zorgt hij ervoor dat de woorden in het menu in het midden staan.*/
   display: block;
   color: black
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
-li a:hover {
+li a:hover { /* Deze regel zorgt ervoor dat als je over het menu zweeft met je muis dat de blokken wit worden, zodat de woorden in de blokken van het menu makkelijker te zien zijn.*/
   background-color: white
 }
